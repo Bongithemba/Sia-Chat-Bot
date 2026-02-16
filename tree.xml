@@ -1,0 +1,8 @@
+<tree text="Welcome to Sia Chat Bot, how can I help you?">
+    <node option="I can't log in"></node>
+    <node option="I have problems with Java"></node>
+    <node option="The system is down">
+        <node option='The system is not accessible over the web'></node>
+        <node option='The system is not accessible over mobile'></node>
+    </node>
+</tree>
