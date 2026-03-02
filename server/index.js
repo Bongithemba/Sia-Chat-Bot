@@ -20,11 +20,14 @@ SteP 2: Iterate over array and compare
 */
 
 let str = "I am trying to log into the amy account but keep getting the reply that my username does not exist, even tho I a registered before ";
-const billingArr =[]
+const billingArr =["money","billing","pay","payment"]
 
-const accountArr =[]
+const accountArr =["login","account","register"]
 
-const technicalArr =[]
+const technicalArr =["crash","lag",]
+
+
 function queryType (query){
-
+      const strArr = query.split("")
+      console.log(strArr)
 }
