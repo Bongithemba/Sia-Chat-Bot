@@ -1,33 +1,29 @@
 import express from "express";
+import pg from pg;
+import { Pool } from "pg-pool";
 import fs from "fs/promises";
 import { parseString } from "xml2js";
 
 const app = express()
 const port = 3000
 
+let clientURL=""
+
+app.use(express.static(clientURL))
+
+const pool = new Pool()
+
+
+
+
 app.listen(port, ()=>{
       console.log(`App running on port ${port}`)
 })
 
 
+app.post("/login", async (req,res)=>{
 
-/*
-Step 1:Turn string into an array
-SteP 2: Iterate over array and compare
-      go over array: check first over billing/accoun/tech array, whenever a word is found updata tally 
+})
 
 
-*/
-
-let str = "I am trying to log into the amy account but keep getting the reply that my username does not exist, even tho I a registered before ";
-const billingArr =["money","billing","pay","payment"]
-
-const accountArr =["login","account","register"]
-
-const technicalArr =["crash","lag",]
-
-
-function queryType (query){
-      const strArr = query.split("")
-      console.log(strArr)
-}
+app.post("/newQuery")
