@@ -1,8 +1,25 @@
-<tree text="Welcome to Sia Chat Bot, how can I help you?">
-    <node option="I can't log in"></node>
-    <node option="I have problems with Java"></node>
-    <node option="The system is down">
-        <node option='The system is not accessible over the web'></node>
-        <node option='The system is not accessible over mobile'></node>
-    </node>
+<tree text="Welcome to Sia bot, how can I help you?">
+	
+	<node option="I can't log in" >
+	</node>
+	
+	<node option="I have problems with Java" >
+	</node>	
+	
+	<node option="The system is down" >
+		<node text="The system is down, is the system:">
+			<node option="Not accessible over the web">
+					<node text="The system is not accessible over the web">
+						<node option="Is your networking connection active?">
+						</node>
+						<node option="If working remotely do you have enough data?">
+						</node>
+					</node>
+			
+			</node>
+			<node option="Not accessible over mobile">
+			</node>
+		</node>
+	</node>	
+	
 </tree>

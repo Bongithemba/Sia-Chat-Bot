@@ -7,18 +7,31 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header id="header">
-        <button >Reset</button>
-        <h1>chat bot!</h1>
-        <button>speak to an agent</button>
+    <header>
+        <h1>Sia Chat Bot</h1>
+        <h2>State the enquiry in box below</h2>
     </header>
-    <br>
-    <br>
-    <div id="xml">
-        <object data="http//:41.86.98.151:4200" width="600" height="600">
-            <embed src="http//:41.86.98.151:4200"/>
-            Error: Embedded data could not be displayed.
-        </object>
+    <div>
+        <form method="POST">
+            <label for="name">Name</label><br>
+            <input name="name" type="text"><br>
+            <label for="email">Email</label><br>
+            <input name="email" type="text"><br>
+            <label for="enquiry">Enquiry</label><br>
+            <textarea name="enquiry"></textarea>
+        </form>
     </div>
+
+    <div id="responseModal">
+        <div class="responseModal-content" style="display: none;">
+            <p>Response to enquiry.</p>
+
+        </div>
+
+    </div>
+
+
+
+
 </body>
 </html>
