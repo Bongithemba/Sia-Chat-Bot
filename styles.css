@@ -8,3 +8,27 @@ button {
     height: 50px;
     width: 70px;
 }
+
+.responseModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+.responseModal-content {
+    background-color: #fff;
+    color: black;
+    width: 400px;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    text-align: center;
+}

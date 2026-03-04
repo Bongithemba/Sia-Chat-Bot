@@ -18,20 +18,24 @@
             <label for="email">Email</label><br>
             <input name="email" type="text"><br>
             <label for="enquiry">Enquiry</label><br>
-            <textarea name="enquiry"></textarea>
+            <textarea name="enquiry"></textarea><br>
         </form>
+        <button onclick="openResponseModal()">Submit</button>
     </div>
 
-    <div id="responseModal">
-        <div class="responseModal-content" style="display: none;">
+    <div id="responseModal" class="responseModal" style="display: none;">
+        <div class="responseModal-content">
             <p>Response to enquiry.</p>
-
+            <button onclick="closeModal()">Ok</button>
+            <form method="POST">
+                <button>Escalate</button>
+            </form>
+            
         </div>
-
     </div>
 
 
 
-
+    <script src="script.js"></script>
 </body>
 </html>
