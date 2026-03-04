@@ -20,6 +20,8 @@ app.listen(port, ()=>{
       console.log(`App running on port ${port}`)
 })
 
+app.post("/Register")
+
 
 app.post("/login", async (req,res)=>{
 
