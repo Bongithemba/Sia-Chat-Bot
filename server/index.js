@@ -3,6 +3,7 @@ import pg from pg;
 import { Pool } from "pg-pool";
 import fs from "fs/promises";
 import { parseString } from "xml2js";
+import "dotenv/config";
 
 const app = express()
 const port = 3000
@@ -11,16 +12,31 @@ let clientURL=""
 
 app.use(express.static(clientURL))
 
-const pool = new Pool()
+const pool = new Pool({
+  user: process.env.PG_USER,
+  password: process.env.PG_PASSWORD,
+  host: process.env.PG_HOST,
+  port: process.env.PG_PORT,
+  database: process.env.PG_DATABASE
+})
 
-
+let currentUser 
 
 
 app.listen(port, ()=>{
       console.log(`App running on port ${port}`)
 })
 
-app.post("/Register")
+app.post("/Register",async (req,res)=>{
+      const {username, password} = req.body
+      try {
+           const result = await pool.query('INSERT INTO users (username, password) VALUES ($1, $2) RETURNING *', [username, password])
+           res.json(result.rows[0])
+      } catch (error) {
+            console.log(error)
+            res.send('Error registering user').json({error:error})
+      }
+})
 
 
 app.post("/login", async (req,res)=>{
