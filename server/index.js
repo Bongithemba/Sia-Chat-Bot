@@ -28,7 +28,11 @@ app.listen(port, ()=>{
 })
 
 app.post("/Register",async (req,res)=>{
-      const {username, password} = req.body
+      const {name, email} = req.body
+
+      const checkUser = await pool.qeuery('SELECT * FROM USERS WHERE email = $1',[email])
+      if(checkUser.rows)
+
       try {
            const result = await pool.query('INSERT INTO users (username, password) VALUES ($1, $2) RETURNING *', [username, password])
            res.json(result.rows[0])
