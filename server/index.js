@@ -31,20 +31,31 @@ app.post("/Register",async (req,res)=>{
       const {name, email} = req.body
 
       const checkUser = await pool.qeuery('SELECT * FROM USERS WHERE email = $1',[email])
-      if(checkUser.rows)
-
-      try {
-           const result = await pool.query('INSERT INTO users (username, password) VALUES ($1, $2) RETURNING *', [username, password])
-           res.json(result.rows[0])
-      } catch (error) {
-            console.log(error)
-            res.send('Error registering user').json({error:error})
+      if(!checkUser.rows){
+            try {
+                  const result = await pool.query('INSERT INTO users (username, password) VALUES ($1, $2) RETURNING *', [username, password])
+                  currentUser =
+                  res.json(result.rows[0])
+            } catch (error) {
+                  console.log(error)
+                  res.send('Error registering user').json({error:error})
+            }
       }
+
+      
 })
 
 
 app.post("/login", async (req,res)=>{
+      const {name,email} = req.body;
 
+      try {
+            const response = await pool.query('SELECT * FROM users WHERE email = $1',[email]);
+            const result = response.rows[0]
+      } catch (error) {
+            console.log(error)
+            res.json({message:""})
+      }
 })
 
 
