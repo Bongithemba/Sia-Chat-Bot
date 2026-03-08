@@ -4,6 +4,7 @@ import { Pool } from "pg-pool";
 import fs from "fs/promises";
 import { parseString } from "xml2js";
 import "dotenv/config";
+import e from "express";
 
 const app = express()
 const port = 3000
@@ -40,7 +41,8 @@ app.post("/Register",async (req,res)=>{
                   console.log(error)
                   res.send('Error registering user').json({error:error})
             }
-      }
+      }else{
+            res.json({message:"User already exists"})
 
       
 })
@@ -52,11 +54,24 @@ app.post("/login", async (req,res)=>{
       try {
             const response = await pool.query('SELECT * FROM users WHERE email = $1',[email]);
             const result = response.rows[0]
+            currentUser = result.uuid
       } catch (error) {
             console.log(error)
-            res.json({message:""})
+            res.json({message:"User not found"})
       }
 })
 
 
-app.post("/newQuery")
+
+
+app.post("/newQuery", async (req,res)=>{
+    const {query} = req.body
+    let queryStatus 
+    try {
+      const response = await pool.query('INSERT INTO queries (query, user_id) VALUES ($1, $2) RETURNING *', [query, currentUser])
+      queryStatus = response.rows[0]
+    } catch (error) {
+      
+    }
+    
+})
