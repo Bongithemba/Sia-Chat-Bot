@@ -1,6 +1,5 @@
 import express from "express";
-import pg from pg;
-import { Pool } from "pg-pool";
+import Database from "better-sqlite3";
 import fs from "fs/promises";
 import { parseString } from "xml2js";
 
