@@ -2,31 +2,21 @@ import express from "express";
 import Database from "better-sqlite3";
 import fs from "fs/promises";
 import { parseString } from "xml2js";
-
-import "dotenv/config";
+import db from "./database/db.js"
+import { v4 as uuidv4 } from 'uuid';
 
 const app = express()
 const port = 3000
 
-let clientURL=""
 
-app.use(express.static(clientURL))
+let currentUser = 'b0ed2a26-0148-4276-8481-5173d06996ea'
 
-const pool = new Pool({
-  user: process.env.PG_USER,
-  password: process.env.PG_PASSWORD,
-  host: process.env.PG_HOST,
-  port: process.env.PG_PORT,
-  database: process.env.PG_DATABASE
-})
-
-let currentUser 
-
-
+app.use(express.urlencoded({extended:true}))
 app.listen(port, ()=>{
       console.log(`App running on port ${port}`)
 })
 
+ 
 app.post("/Register",async (req,res)=>{
       const {name, email} = req.body
 
@@ -61,8 +51,6 @@ app.post("/login", async (req,res)=>{
 })
 
 
-
-
 app.post("/newQuery", async (req,res)=>{
     const {query} = req.bodY 
     try {
@@ -71,4 +59,60 @@ app.post("/newQuery", async (req,res)=>{
     } catch (error) {
       
     }  
+}) 
+
+
+
+//CREATE
+//USER
+
+app.post('/newUser', async (req,res)=>{
+      const {name,email}= req.body;
+
+      try {
+
+            const query = db.prepare('INSERT INTO users(uuid,name,email) VALUES (?,?,?)');
+            const result = query.run(uuidv4(),name,email);
+            res.send(result)
+      } catch (error) {
+            res.send(error)  
+      }
+      
 })
+
+
+//QUERY
+
+app.post("/newQuery", async (req,res)=>{
+      const {query} =req.body;
+
+      try {
+            const stmnt = db.prepare('INSERT INTO queries(user_id,query_text) VALUES(?,?)');
+            const result= stmnt.run(currentUser,query);
+            console.log(result)
+            res.send("done")
+            
+            
+      } catch (error) {
+            console.log(error)
+            res.send(error)
+      }
+      
+})
+
+//READ
+//users
+
+app.get('/users', async (req,res)=>{
+      const query = db.prepare('SELECT * FROM users');
+      const result = query.all();
+      console.log()
+      res.send(result)
+})
+//queries
+app.get('/queries', async (req,res)=>{
+      const query = db.prepare('SELECT * FROM queries');
+      const result = query.all();
+      res.send(result)
+})
+
