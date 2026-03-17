@@ -17,48 +17,77 @@ app.listen(port, ()=>{
 })
 
  
-app.post("/Register",async (req,res)=>{
+app.post("/register",async (req,res)=>{
       const {name, email} = req.body
 
-      const checkUser = await pool.qeuery('SELECT * FROM USERS WHERE email = $1',[email])
-      if(!checkUser.rows){
+      const findUser = db.prepare('SELECT * FROM users WHERE email = ?');
+      const findUserResult = findUser.all(email);
+
+
+      if(findUserResult.length < 1){
             try {
-                  const result = await pool.query('INSERT INTO users (username, password) VALUES ($1, $2) RETURNING *', [username, password])
-                  currentUser =
-                  res.json(result.rows[0])
-            } catch (error) {
-                  console.log(error)
-                  res.send('Error registering user').json({error:error})
+                 const registerUser = db.prepare("INSERT INTO users(email,name,uuid) VALUES(?,?,?)"); 
+                 const registerResult = registerUser.run(email,name,uuidv4());
+                 res.json({message:"User registered successfully"})
+
+            } catch (err) {
+                  res.json({
+                        message:"Register failed",
+                        error:err
+                  })
             }
       }else{
             res.json({message:"User already exists"})
-
       }
 })
 
 
 app.post("/login", async (req,res)=>{
-      const {name,email} = req.body;
+      const {email} = req.body;
 
       try {
-            const response = await pool.query('SELECT * FROM users WHERE email = $1',[email]);
-            const result = response.rows[0]
-            currentUser = result.uuid
-      } catch (error) {
-            console.log(error)
-            res.json({message:"User not found"})
+            const login = db.prepare("SELECT * FROM users WHERE email = ?")
+            const loginRes = login.get(email)
+            if(!loginRes){
+                 return res.status(404).json({
+                        message:"User does not exist"
+                  })
+            }
+            currentUser = loginRes.uuid
+            return res.json({
+                  message:"Login successful",
+                  email:loginRes.email,
+                  name:loginRes.name,
+                  uuid:loginRes.uuid
+            })
+      } catch (err) {
+            return res.status(500).json({
+                  message:"Login failed",
+                  Error:err
+            })
       }
 })
 
 
 app.post("/newQuery", async (req,res)=>{
-    const {query} = req.bodY 
-    try {
-      const response = await pool.query('INSERT INTO queries (query, user_id) VALUES ($1, $2) RETURNING *', [query, currentUser])
-      
-    } catch (error) {
-      
-    }  
+    const {query} = req.body
+    /*
+      Logic to get query type 
+    */
+      let queryType
+      try {
+            const insertQeury = db.prepare('INSERT INTO queries(user_id,query_text)');
+            const insertResult = insertQeury.run(currentUser,query);
+      } catch (error) {
+            return res.json({
+                  message:"Failed to insert query"
+            })
+      } 
+      let response 
+       /*
+            Logic to send answer
+      */
+      res.json({message:""})
 }) 
 
 
