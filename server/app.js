@@ -92,42 +92,8 @@ app.post("/newQuery", async (req,res)=>{
 
 
 
-//CREATE
-//USER
-
-app.post('/newUser', async (req,res)=>{
-      const {name,email}= req.body;
-
-      try {
-
-            const query = db.prepare('INSERT INTO users(uuid,name,email) VALUES (?,?,?)');
-            const result = query.run(uuidv4(),name,email);
-            res.send(result)
-      } catch (error) {
-            res.send(error)  
-      }
-      
-})
 
 
-//QUERY
-
-app.post("/newQuery", async (req,res)=>{
-      const {query} =req.body;
-
-      try {
-            const stmnt = db.prepare('INSERT INTO queries(user_id,query_text) VALUES(?,?)');
-            const result= stmnt.run(currentUser,query);
-            console.log(result)
-            res.send("done")
-            
-            
-      } catch (error) {
-            console.log(error)
-            res.send(error)
-      }
-      
-})
 
 //READ
 //users
