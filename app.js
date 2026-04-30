@@ -4,10 +4,12 @@ const cors = require('cors');
 const bcrypt = require('bcrypt'); //hashing passwords from user inpt
 const cookieParser =  require('cookie-parser');
 const jwt = require('jsonwebtoken');
-require('dotenv').config()
+const dotenv = require  ('dotenv'); // import dotenv package
+
+dotenv.config({ path: '/home/student/Sia-Chat-Bot/.env'}); //configure dotenv filepath
 
 const {v4: uuidv4} = require('uuid');
-const { generateSolution, detectCategory, handleFeedback } = require('./decisionLogic');
+// const { generateSolution, detectCategory, handleFeedback } = require('./decisionLogic');
 const {queries} = require('./database/queries');
 const path = require('path');
 
@@ -93,6 +95,11 @@ app.post('/api/enquiry', authenticateToken, (req, res) => {
         queryid:enquiryID
     });
 });
+
+
+app.post("/getResponse", (req,res) =>{
+
+})
 
 
 //******sign-up logic**********
