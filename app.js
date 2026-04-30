@@ -5,30 +5,34 @@ const bcrypt = require('bcrypt'); //hashing passwords from user inpt
 const cookieParser =  require('cookie-parser');
 const jwt = require('jsonwebtoken');
 const dotenv = require  ('dotenv'); // import dotenv package
-
-dotenv.config({ path: '/home/student/Sia-Chat-Bot/.env'}); //configure dotenv filepath
-
 const {v4: uuidv4} = require('uuid');
-// const { generateSolution, detectCategory, handleFeedback } = require('./decisionLogic');
 const {queries} = require('./database/queries');
 const path = require('path');
+// import {GoogleGenAI} from '@google/genai';
+const {GoogleGenAI} = require('@google/genai');
+//***********All Imports**************/
+
 
 const app = express();
 const PORT = 3000;
-
-app.listen(PORT, () => {console.log(`Server running at http://localhost:${PORT}`)});
-
-
-
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+const ai = new GoogleGenAI({apiKey: GEMINI_API_KEY});
+dotenv.config({ path: '/home/student/Sia-Chat-Bot/.env'}); //configure dotenv filepath
 app.use(cors());
-app.use(cookieParser())
+app.use(cookieParser());
 app.use(express.json());
-app.use(express.urlencoded({extended:true}))
-
+app.use(express.urlencoded({extended:true}));
 app.use(express.static('public'));
-
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+
+app.listen(PORT, () => {
+    console.log(`Server running at http://localhost:${PORT}`)
+    console.log(`connected to Gemini as ${ai}`);
+});
+
+
+
 
 
 
