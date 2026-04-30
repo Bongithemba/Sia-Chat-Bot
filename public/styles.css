@@ -1,0 +1,148 @@
+body {
+ background-color: bisque;     
+}
+
+
+header {
+    text-align: center;
+    color: white;
+    background-color: black;
+}
+
+#userForm {
+    border: 2px green;
+    background-color: aqua;
+    width: 500px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+#enquiry {
+    width: 250px;
+    height: 150px;
+}
+
+
+#submit {
+    height: 50px;
+    width: 70px;
+}
+
+.responseModal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    /* display: flex; */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+.responseModal-content {
+    background-color: #fff;
+    color: black;
+    width: 400px;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    text-align: center;
+}
+
+    .error-message {
+      color: #ffc107;
+      text-align: center;
+      font-weight: 600;
+      margin-top: 1rem;
+    }
+
+
+
+
+
+
+/* user signup */
+/* Container */
+.container {
+  max-width: 500px; 
+  padding: 50px; 
+  background: rgba(255, 255, 255, 0.623);
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  margin: 100px auto; 
+}
+
+/* Heading */
+.container h1 {
+  margin-bottom: 50px;
+  font-size: 40px; 
+}
+
+/* Paragraph */
+.container p {
+  margin-bottom: 10px;
+  font-size: 20px;
+  text-align: center;
+  margin-top: 30px;
+}
+
+/* Labels */
+.container label {
+  font-weight: bold;
+  font-size: 20px;
+  margin-top: 15px;
+}
+
+/* Inputs */
+.container input[type="text"], input[type="email"], input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 18px;
+  box-sizing: border-box;
+}
+
+/* Button Styles */
+.container button {
+  padding: 12px;
+  font-size: 18px;
+  color: white;
+  background-color: #0d0e0d;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s;
+}
+
+.container button:hover {
+  background-color: #6d6d6d;
+}
+
+
+.container  a {
+  color: hsl(0, 0%, 3%);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.container  a:hover {
+  text-decoration: underline;
+} 
+
+
+
+
+
+
+
+
+
+
