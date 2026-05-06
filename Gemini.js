@@ -6,7 +6,6 @@ const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 
 const ai = new GoogleGenAI({apiKey: GEMINI_API_KEY});
 
-
 // 1. First turn
 const interaction1 = await ai.interactions.create({
     model: 'gemini-2.5-flash',
