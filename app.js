@@ -100,7 +100,7 @@ app.post('/api/enquiry', authenticateToken, (req, res) => {
 
 //******User query */
 app.post("/getResponse",async (req,res) =>{
-    let query = body["query"];
+    let query = req.body["query"];
     
         // 1. First turn
     const interaction1 = await ai.interactions.create({
@@ -136,7 +136,7 @@ app.post("/getResponse",async (req,res) =>{
         console.error('error message: ', e.message);
         console.error('error status: ', e.status);
     });
-    res.render('query', {response:interaction2.output.text})
+    res.json({response:interaction2.output.text})
     console.debug(interaction2);
 })
 

@@ -102,3 +102,23 @@ function escalateIssue() {
 submitBtn.addEventListener('click', openResponseModal);
 closeBtn.addEventListener('click', closeModal);
 escalateBtn.addEventListener('click', escalateIssue);
+
+// Intercept button clicks
+document.getElementById('submit').addEventListener('click', async () => {
+    const query = document.getElementById('query').value;
+    const name = document.getElementById('name').value;
+
+    const res = await fetch('/getResponse', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query, name })
+    });
+
+    const data = await res.json();
+    document.getElementById('message').textContent = data.response;
+    document.getElementById('responseModal').style.display = 'flex';
+});
+
+document.getElementById('closeBtn').addEventListener('click', () => {
+    document.getElementById('responseModal').style.display = 'none';
+});

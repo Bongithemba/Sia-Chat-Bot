@@ -21,18 +21,20 @@
             <input name="email" type="text" id="email"><br><br>
             <label for="query">Enquiry</label><br>
             <textarea name="query" id="query" placeholder="Enter any issue you are having"></textarea><br>
-            <button type="button" id="submit">Submit</button>
+            <button type="submit" id="submit">Submit</button>
         </form>
     </div> 
 
    <div id="responseModal" class="responseModal">
       <div class="responseModal-content">
-         <p id="message"><%= response %></p>
-         <button type="button" id="closeBtn">Ok</button> 
-         <form method="POST">
-             <button type="button" id="escalateBtn">Escalate</button>
-         </form>
-     </div>
+            <% if (locals.response) { %>
+                <p id="message"><%= response %></p>
+            <% } %>
+            <button type="button" id="closeBtn">Ok</button> 
+            <form method="POST">
+                <button type="button" id="escalateBtn">Escalate</button>
+            </form>
+        </div>
     </div>
 
    <script src="/script.js"></script>
