@@ -19,15 +19,15 @@
             <input name="name" type="text" id="name"><br><br>
             <label for="email">Email</label><br>
             <input name="email" type="text" id="email"><br><br>
-            <label for="enquiry">Enquiry</label><br>
-            <textarea name="enquiry" id="enquiry" placeholder="Enter any issue you are having"></textarea><br>
+            <label for="query">Enquiry</label><br>
+            <textarea name="query" id="query" placeholder="Enter any issue you are having"></textarea><br>
             <button type="button" id="submit">Submit</button>
         </form>
     </div> 
 
    <div id="responseModal" class="responseModal">
       <div class="responseModal-content">
-         <p id="response"></p>
+         <p id="message"><%= response %></p>} %> 
          <button type="button" id="closeBtn">Ok</button> 
          <form method="POST">
              <button type="button" id="escalateBtn">Escalate</button>

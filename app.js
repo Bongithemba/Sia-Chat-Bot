@@ -12,11 +12,12 @@ const path = require('path');
 const {GoogleGenAI} = require('@google/genai');
 //***********All Imports**************/
 
+dotenv.config({ path: '/home/student/Sia-Chat-Bot/.env'}); //configure dotenv filepath
 const app = express();
 const PORT = 3000;
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 const ai = new GoogleGenAI({apiKey: GEMINI_API_KEY});
-dotenv.config({ path: '/home/student/Sia-Chat-Bot/.env'}); //configure dotenv filepath
+
 app.use(cors());
 app.use(cookieParser());
 app.use(express.json());
@@ -99,7 +100,7 @@ app.post('/api/enquiry', authenticateToken, (req, res) => {
 
 //******User query */
 app.post("/getResponse",async (req,res) =>{
-    let query = body["enquiry"];
+    let query = body["query"];
     
         // 1. First turn
     const interaction1 = await ai.interactions.create({
@@ -135,6 +136,7 @@ app.post("/getResponse",async (req,res) =>{
         console.error('error message: ', e.message);
         console.error('error status: ', e.status);
     });
+    res.render('query', {response:interaction2.output.text})
     console.debug(interaction2);
 })
 
