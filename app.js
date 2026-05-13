@@ -12,7 +12,7 @@ const path = require('path');
 const {GoogleGenAI} = require('@google/genai');
 //***********All Imports**************/
 
-dotenv.config({ path: '/home/student/Sia-Chat-Bot/.gitignore'}); //configure dotenv filepath
+dotenv.config({ path: '/home/student/Sia-Chat-Bot/.env'}); //configure dotenv filepath
 const app = express();
 const PORT = 3000;
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
