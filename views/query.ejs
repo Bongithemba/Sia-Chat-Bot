@@ -27,15 +27,12 @@
 
    <div id="responseModal" class="responseModal">
       <div class="responseModal-content">
-            <% if (locals.response) { %>
-                <p id="message"><%= response %></p>
-            <% } %>
+                <p id="message"></p>
             <button type="button" id="closeBtn">Ok</button> 
-            <form method="POST">
-                <button type="button" id="escalateBtn">Escalate</button>
-            </form>
+            <button type="button" id="escalateBtn">Escalate</button>
         </div>
     </div>
+    <script src="/script.js"></script>
 
 </body>
 </html>

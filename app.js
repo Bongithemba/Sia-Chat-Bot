@@ -121,7 +121,7 @@ app.post("/getResponse", async (req, res) => {
 
         console.log(JSON.stringify(interaction2.outputs, null, 2));
 
-        const textBlock = interaction2.outputs.text
+        const textBlock = interaction2.outputs[1].text
 
         return res.json({ response: textBlock });
 
