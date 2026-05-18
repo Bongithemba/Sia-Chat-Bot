@@ -206,8 +206,6 @@ app.post("/loginDetails", (req, res)=>{
 
 app.post('/api/escalate', (req, res) => {
     const { name, enquiry,enquiryID } = req.body;
-    const category = detectCategory(enquiry);
-    const feedback = handleFeedback(name, category, false);
    try {
     const result= queries.updateQueryStatus.run(0,enquiryID);
    } catch (err) {
@@ -216,8 +214,7 @@ app.post('/api/escalate', (req, res) => {
         errror:err
     })
    } 
-
-    return res.json({ message: feedback.message });
+    return res.json({ message: "Enquiry escalated to human support. Our team will get back to you shortly." });
 });
 
 

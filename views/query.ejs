@@ -28,8 +28,11 @@
    <div id="responseModal" class="responseModal">
       <div class="responseModal-content">
                 <p id="message"></p>
-            <button type="button" id="closeBtn">Ok</button> 
-            <button type="button" id="escalateBtn">Escalate</button>
+            <button type="button" id="closeBtn">Ok</button>
+            <form action="api/escalate" method="POST">
+                <button type="submit" id="escalateBtn">Escalate</button>
+            </form> 
+            
         </div>
     </div>
     <script src="/script.js"></script>
